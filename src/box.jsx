@@ -3,7 +3,7 @@ import Field from "./field"
 
 const Box = () => {
 
-    const [turn, setTurn] = useState('x')
+    const [turn, setTurn] = useState('X')
     const [cells, setCells] = useState(Array(9).fill(''))
     const [winner, setWinner] = useState()
     const combos = {
@@ -39,12 +39,12 @@ const Box = () => {
         let squares = [...cells]
         while(squares[num] == '')
         {
-            if(turn == 'x') {
-                squares[num] = 'x'
-                setTurn('o')
+            if(turn == 'X') {
+                squares[num] = 'X'
+                setTurn('O')
             } else {
-                squares[num] = 'o'
-                setTurn('x')
+                squares[num] = 'O'
+                setTurn('X')
             }
         }
         console.log(squares)
@@ -53,13 +53,21 @@ const Box = () => {
 
     }
 
+    const handleRestartGame = () => {
+        setTurn('X')
+        setCells(Array(9).fill(''))
+        setWinner()
+    }
+
     const Cell = ({ num }) => {
         return <td className="field" onClick={() => handleClick(num)}>{cells[num]}</td>
     }
 
     return (
         <>
-            Turn: {turn}
+            <a className="words">Turn: {turn}</a>
+            <br/>
+            <br/>   
             <div className="container">
             <table>
                 <tbody>
@@ -83,8 +91,8 @@ const Box = () => {
 
             {winner && (
                 <>
-                    <p>{winner} is the Winner</p>
-                    <button>Play Again</button>
+                    <p className="words">{winner} is the Winner</p>
+                    <button className="buttons"onClick={() => handleRestartGame()}>Play Again</button>
                 </>
             )}
         </div>

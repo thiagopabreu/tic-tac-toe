@@ -3,7 +3,9 @@ import Box from './box.jsx';
 function App() {
 
   return (
-    <Box></Box>
+    <div className='box'>
+      <Box/>
+    </div>
     
   )
 }
