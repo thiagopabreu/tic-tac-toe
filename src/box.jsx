@@ -6,6 +6,7 @@ const Box = () => {
     const [turn, setTurn] = useState('X')
     const [cells, setCells] = useState(Array(9).fill(''))
     const [winner, setWinner] = useState()
+    let winnerPhrase = 'The winner is: ' + winner
     const combos = {
         vertical: [
             [0, 3, 6],
@@ -30,9 +31,22 @@ const Box = () => {
                     
                 } else if(squares[pattern[0]] === squares[pattern[1]] && squares[pattern[1]] === squares[pattern[2]] ) {
                     setWinner(squares[pattern[0]])
-                }
+                    return ':D';
+                } 
             })
         }
+        if(squares.includes('') != true  ) {
+            isDraw()
+        }
+    }
+
+    const isDraw = () => {
+        setTurn('Draw')
+        setWinner('Draw')
+        const turnPhrase = document.getElementsByClassName('words')[0]
+        turnPhrase.innerText = 'Draw'
+        winnerPhrase = 'Draw'
+        
     }
 
     const handleClick = (num) => {
@@ -91,7 +105,7 @@ const Box = () => {
 
             {winner && (
                 <>
-                    <p className="words">{winner} is the Winner</p>
+                    <p className="words">{winnerPhrase}</p>
                     <button className="buttons"onClick={() => handleRestartGame()}>Play Again</button>
                 </>
             )}
